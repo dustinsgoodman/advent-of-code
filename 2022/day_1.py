@@ -10,4 +10,5 @@ with open('day_1_input.txt', encoding='utf8') as f:
         else:
             calories_per_elf[-1] += int(calories)
 
-print(max(calories_per_elf))
+sorted_calories_per_elf = sorted(calories_per_elf, reverse=True)
+print(sum(sorted_calories_per_elf[0:3]))
