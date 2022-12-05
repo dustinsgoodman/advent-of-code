@@ -9,7 +9,7 @@ PRIORITY_LOOKUP = dict(
 def generate_groups():
     """Read input file and generate groups of 3"""
     groups = []
-    with open('day_3_input.txt', encoding="utf8") as f:
+    with open('input.txt', encoding="utf8") as f:
         curr_line = 0
         curr_group = []
         for line in f:
@@ -37,7 +37,7 @@ def get_items_priority(items):
 def part1():
     """Program part1 method"""
     total_score = 0
-    with open('day_3_input.txt', encoding="utf8") as f:
+    with open('input.txt', encoding="utf8") as f:
         for line in f:
             sack_contents = line.strip()
             middle = int(len(sack_contents)/2)

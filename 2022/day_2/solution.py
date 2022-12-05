@@ -41,7 +41,7 @@ def get_strategy_score(opponent, suggestion):
 def main():
     """Program main method"""
     total_score = 0
-    with open('day_2_input.txt', encoding="utf8") as f:
+    with open('input.txt', encoding="utf8") as f:
         for line in f:
             [opponent, suggestion] = line.strip().split(' ')
             outcome = get_strategy_score(opponent, suggestion)

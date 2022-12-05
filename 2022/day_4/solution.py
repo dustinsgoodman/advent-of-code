@@ -22,7 +22,7 @@ def are_assignments_partially_overlapping(assignments):
 def part1():
     """Program part1 method"""
     total_overlapping_sets = 0
-    with open('day_4_input.txt', encoding="utf8") as f:
+    with open('input.txt', encoding="utf8") as f:
         for line in f:
             assignments = [get_assignment_range(assignment)
                            for assignment in line.strip().split(',')]
@@ -35,7 +35,7 @@ def part1():
 def part2():
     """Program part2 method"""
     total_overlapping_sets = 0
-    with open('day_4_input.txt', encoding="utf8") as f:
+    with open('input.txt', encoding="utf8") as f:
         for line in f:
             assignments = [get_assignment_range(assignment)
                            for assignment in line.strip().split(',')]

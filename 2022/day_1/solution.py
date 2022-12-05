@@ -1,7 +1,7 @@
 """Solution to Day 1"""
 
 calories_per_elf = [0]
-with open('day_1_input.txt', encoding='utf8') as f:
+with open('input.txt', encoding='utf8') as f:
     for line in f:
         calories = line.strip()
 
