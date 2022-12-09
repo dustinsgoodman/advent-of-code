@@ -1,5 +1,8 @@
 """Solution to Day 7"""
+from functools import reduce
 
+TOTAL_DISK_SPACE = 70_000_000
+MIN_SPACE_REQUIRED = 30_000_000
 MAX_DIR_SIZE = 100_000
 
 
@@ -38,14 +41,14 @@ class Node:
 
         return self.file_size
 
-    def get_all_dir_sizes(self, results):
-        """get sizes of all directories in the current tree"""
+    def get_all_dir(self, results):
+        """get all directories in the current tree"""
         if not self.is_dir:
             return
         else:
-            results.append(self.get_size())
+            results.append(self)
             for child in self.children:
-                child.get_all_dir_sizes(results)
+                child.get_all_dir(results)
 
         return results
 
@@ -92,6 +95,14 @@ def build_tree(file, root_node):
                 )
 
 
+def part1_sum_dirs(total, curr_dir):
+    """sum all dirs with size less than max size"""
+    dir_size = curr_dir.get_size()
+    if dir_size < MAX_DIR_SIZE:
+        return total + dir_size
+    return total
+
+
 def main():
     """Program main"""
     with open('input.txt', encoding="utf8") as file:
@@ -100,10 +111,24 @@ def main():
 
     # verify tree was built correctly
 
-    results = []
-    root.get_all_dir_sizes(results)
-    sum_of_dir_sizes = sum(filter(lambda val: val < MAX_DIR_SIZE, results))
+    # part 1 solution
+    dirs = []
+    root.get_all_dir(dirs)
+
+    sum_of_dir_sizes = reduce(part1_sum_dirs, dirs, 0)
     print(sum_of_dir_sizes)
+
+    available_space = TOTAL_DISK_SPACE - root.get_size()
+    target_deletion_size = MIN_SPACE_REQUIRED - available_space
+    deletion_candidates = list(
+        filter(lambda curr_dir: curr_dir.get_size() > target_deletion_size, dirs))
+
+    deletion_candidate = deletion_candidates[0]
+    for candidate in deletion_candidates[1:]:
+        if candidate.get_size() < deletion_candidate.get_size():
+            deletion_candidate = candidate
+
+    print(deletion_candidate.get_size())
 
 
 main()
